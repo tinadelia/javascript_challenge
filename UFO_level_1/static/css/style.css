@@ -10,6 +10,9 @@ body {
   margin: 0;
 }
 
+button {
+  background: #4e5d6c;
+}
 /* The wrapper contains all of the page's content besides the footer, which is pushed to the bottom of the page */
 .wrapper {
   position: relative;
