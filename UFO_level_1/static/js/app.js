@@ -48,7 +48,7 @@ var dateInput = d3.select("#datetime").property("value");
     .append("tr")
     .append("td")
     .attr("colspan", 7)
-    .html("<h4>No Records Found</h4>");
+    .html("<h4>No Records</h4>");
     };
 
     console.log(filteredTableData);
