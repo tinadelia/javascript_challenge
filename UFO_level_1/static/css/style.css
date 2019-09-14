@@ -10,9 +10,18 @@ body {
   margin: 0;
 }
 
-button {
-  background: #4e5d6c;
-}
+
+.img-ufo{
+  position: relative;
+  height: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 60px;
+   }
+
+
+
 /* The wrapper contains all of the page's content besides the footer, which is pushed to the bottom of the page */
 .wrapper {
   position: relative;

@@ -1,42 +1,60 @@
 // from data.js
 var tableData = data;
 
-
 //reference the table body  
 var tbody = d3.select("tbody")
 
 
 //append data to the table
-function displayData(data){ 
-    tbody.text("")
-    data.forEach(function(sighting){
-    new_tr = tbody.append("tr")
-    Object.entries(sighting).forEach(function([key, value]){
-        new_td = new_tr.append("td").text(value)	
-    })
-})}
+function tableDisplay(ufoSightings) {
+    var tbody = d3.select("tbody");
+    ufoSightings.forEach((ufoRecord) => {
+    var row = tbody.append("tr");
+    Object.entries(ufoRecord).forEach(([key, value]) => {
+    var cell = row.append("td");
+    cell.html(value);
+        });
+    });
+};
 
 //display the table data
-displayData(tableData)
+console.log(tableData);
+tableDisplay(tableData);
 
+//refresh function
+function Refresh() {
+    d3.select("tbody")
+    .selectAll("tr").remove()
+    .selectAll("td").remove();
+    };
 
-//select the user input and filter button
-var dateInputText = d3.select("#datetime")
-var button = d3.select("filter-btn")
-
-
-// filter data with user input date
-function clickSelect(){
-
-    //stop refresh on the page
+//select the filter button, stop refresh on the page
+var button = d3.select("#filter-btn");
+    button.on("click", function(event) {
     d3.event.preventDefault();
+    Refresh();
 
-    //filter table showing the filterd data
-    var filter_table = tableData.filter(sighting => sighting.datetime===dateInputText.property("value"))
+//input value
+var dateInput = d3.select("#datetime").property("value");
+    if (dateInput.trim() === "" ) {
+    var filteredTableData = tableData;
+    } else {
+    var filteredTableData = tableData.filter(ufoSighting => 
+    ufoSighting.datetime === dateInput.trim());
+};
 
-    //display of the filter table
-    displayData(filter_table);
-}
+  if (filteredTableData.length == 0) {
+    d3.select("tbody")
+    .append("tr")
+    .append("td")
+    .attr("colspan", 7)
+    .html("<h4>No Records Found</h4>");
+    };
 
-//event listener for change
-dateInputText.on("change", clickSelect)
+    console.log(filteredTableData);
+    tableDisplay(filteredTableData);
+    });
+
+
+
+
